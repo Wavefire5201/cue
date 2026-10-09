@@ -93,7 +93,7 @@
 </script>
 
 <svelte:head>
-	<title>{search.query || 'Search'}</title>
+	<title>{search.query ? `${search.query} · Cue` : 'Cue'}</title>
 </svelte:head>
 
 <section class="search">

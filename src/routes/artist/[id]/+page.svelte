@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>{artist.name}</title>
+	<title>{artist.name} · Cue</title>
 </svelte:head>
 
 <article style:--media-size="220px">

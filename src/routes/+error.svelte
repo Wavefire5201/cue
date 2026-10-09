@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>{page.error?.message ?? 'Something went wrong'}</title>
+	<title>{page.error?.message ?? 'Something went wrong'} · Cue</title>
 </svelte:head>
 
 <BackLink />

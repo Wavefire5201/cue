@@ -32,7 +32,7 @@
 </script>
 
 <svelte:head>
-	<title>{album.title} by {album.artist.name}</title>
+	<title>{album.title} by {album.artist.name} · Cue</title>
 </svelte:head>
 
 <article style:--media-size="300px">
