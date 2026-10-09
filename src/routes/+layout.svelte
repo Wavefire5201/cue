@@ -5,12 +5,18 @@
 	import { navigating } from '$app/state';
 	import NowPlaying from '#lib/components/NowPlaying.svelte';
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
+	import { injectAnalytics, trackPageview } from '#lib/analytics.js';
 	import { appHistory } from '#lib/state/history.svelte.js';
 	import type { LayoutProps } from './$types';
 
 	let { children }: LayoutProps = $props();
 
-	afterNavigate((navigation) => appHistory.track(navigation));
+	injectAnalytics();
+
+	afterNavigate((navigation) => {
+		appHistory.track(navigation);
+		trackPageview(navigation);
+	});
 
 	// Crossfade between pages; typing in search (same route) is left alone.
 	onNavigate((navigation) => {
