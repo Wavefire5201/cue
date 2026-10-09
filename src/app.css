@@ -1,0 +1,168 @@
+:root {
+	/* Each token is (light, dark). The system setting picks one unless the theme toggle
+	   has set data-theme on <html> (applied before first paint by app.html). */
+	--bg: light-dark(#fafaf9, #0f0f0e);
+	--surface: light-dark(#f1f1ef, #1a1a19);
+	--surface-hover: light-dark(#ececea, #212120);
+	--text: light-dark(#121211, #ededeb);
+	--muted: light-dark(#6c6c68, #93938e);
+	--faint: light-dark(#a6a6a1, #5d5d59);
+	--line: light-dark(#e4e4e1, #262625);
+	--shade: light-dark(rgb(0 0 0 / 0.06), rgb(255 255 255 / 0.06));
+
+	--font: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+	--max: 1040px;
+	--gutter: clamp(16px, 4vw, 40px);
+	--ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+	color-scheme: light dark;
+}
+
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	margin: 0;
+	min-height: 100dvh;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font);
+	font-weight: 300;
+	font-size: 1rem;
+	line-height: 1.55;
+	letter-spacing: -0.006em;
+	font-feature-settings: 'cv11', 'ss03';
+}
+
+h1,
+h2,
+h3,
+p,
+ol,
+ul {
+	margin: 0;
+}
+
+ol,
+ul {
+	padding: 0;
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button,
+input {
+	font: inherit;
+	color: inherit;
+	letter-spacing: inherit;
+}
+
+button {
+	background: none;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+:focus-visible {
+	outline: 1.5px solid var(--text);
+	outline-offset: 3px;
+}
+
+::selection {
+	background: var(--text);
+	color: var(--bg);
+}
+
+.label {
+	font-size: 0.75rem;
+	font-weight: 450;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+
+.num {
+	font-variant-numeric: tabular-nums;
+}
+
+.source-link {
+	display: inline-block;
+	margin-top: 64px;
+	font-size: 0.875rem;
+	color: var(--muted);
+	text-decoration: underline;
+	text-decoration-color: var(--line);
+	text-underline-offset: 4px;
+	transition: color 0.15s;
+}
+
+.source-link:hover {
+	color: var(--text);
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* Theme toggle: a short crossfade between the old and new colours (see ThemeToggle). */
+:root:active-view-transition-type(theme)::view-transition-old(root),
+:root:active-view-transition-type(theme)::view-transition-new(root) {
+	animation-duration: 0.35s;
+	animation-timing-function: ease;
+}
+
+/* The toggle sits out of that crossfade: only its live new state shows, so its sun/moon
+   morph draws at full strength instead of fading over a ghost of the old icon. */
+:root:active-view-transition-type(theme) .theme-toggle {
+	view-transition-name: theme-toggle;
+}
+
+:root:active-view-transition-type(theme)::view-transition-old(theme-toggle) {
+	display: none;
+}
+
+:root:active-view-transition-type(theme)::view-transition-new(theme-toggle) {
+	animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
+}
