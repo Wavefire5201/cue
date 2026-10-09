@@ -1,13 +1,16 @@
 <script lang="ts">
 	import '@fontsource-variable/inter/opsz.css';
 	import '../app.css';
-	import { onNavigate } from '$app/navigation';
+	import { afterNavigate, onNavigate } from '$app/navigation';
 	import { navigating } from '$app/state';
 	import NowPlaying from '#lib/components/NowPlaying.svelte';
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
+	import { appHistory } from '#lib/state/history.svelte.js';
 	import type { LayoutProps } from './$types';
 
 	let { children }: LayoutProps = $props();
+
+	afterNavigate((navigation) => appHistory.track(navigation));
 
 	// Crossfade between pages; typing in search (same route) is left alone.
 	onNavigate((navigation) => {
